@@ -16,6 +16,7 @@ ext{
                             junit: "net.serenity-bdd:serenity-junit:${serenityCoreVersion}",
                             screenplay: "net.serenity-bdd:serenity-screenplay:${serenityCoreVersion}",
                             screenplayWebdriver: "net.serenity-bdd:serenity-screenplay-webdriver:${serenityCoreVersion}",
+                            restAssured: "net.serenity-bdd:serenity-rest-assured:${serenityCoreVersion}",
                             cucumber: "net.serenity-bdd:serenity-cucumber:${serenityCucumberVersion}",
                     ],
                     junit: "junit:junit:${junitVersion}",
