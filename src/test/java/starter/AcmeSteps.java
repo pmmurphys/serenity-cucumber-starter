@@ -1,20 +1,26 @@
 package starter;
 
-import cucumber.api.java.en.*;
-import net.serenitybdd.core.Serenity;
-import net.serenitybdd.core.pages.WebElementFacade;
-
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import junit.framework.Assert;
+import net.serenitybdd.core.Serenity;
+import net.serenitybdd.core.pages.WebElementFacade;
+import static org.assertj.core.api.Assertions.*;
+
 public class AcmeSteps {
 	
 	BasePageObject page;
 	
-	String baseUrl = "http://peach-two.pyramidchallenges.com.s3-website.us-east-2.amazonaws.com/";
+	String baseUrl = "http://integration.peachthree.pac.pyramidchallenges.com";
+	String baseUri = "http://api.peachthree.pac.pyramidchallenges.com/api";
 
     @Given("^i open the ACME home page$")
     public void iOpenTheACMEHomePage() throws Throwable {
@@ -130,5 +136,85 @@ public class AcmeSteps {
     	Serenity.setSessionVariable("updatedEmployeeModel").to(page.getEmployeeModelFromEditModal());
         page.clickSubmit();
     }
+    
+    @When("^i type (.+) into search input$")
+    public void iTypeIntoSearchInput(String field) throws Throwable {
+        page.typeIntoSearchInput(field);
+    }
 
-}
+    @Then("^(.+) should display at the top of the list$")
+    public void shouldDisplayAtTheTopOfTheList(String field) throws Throwable {
+        //TO DO: API Call for all items for filter
+    	//TO DO: check api call items with returned items
+    	
+    	//Check to make sure no irrelevant fields are shown 
+    	List<WebElementFacade> names = page.getNames();
+    	List<WebElementFacade> phones = page.getPhones();
+    	List<WebElementFacade> emails = page.getEmails();
+    	List<WebElementFacade> addresses = page.getAddresses();
+    	
+    	//TO DO: get the skills 
+    	String skills = "Nothing";
+    	
+    	assertThat(names.get(0).getTextValue().contains(field) ||
+    			phones.get(0).getTextValue().contains(field) ||
+    			emails.get(0).getTextValue().contains(field) ||
+    			addresses.get(0).getTextValue().contains(field) ||
+    			skills.contains(field)).isEqualTo(true);
+    		
+    		
+    	}
+    	
+//    	names.stream()
+//    		.filter(x -> "bob".contains(x.getTextValue()))
+//    		.findAny();
+//    	
+//    	for (int i = 0; i < names.size(); i++) {
+//    		
+//    		boolean row = false; 
+//    		
+//    		if (names.get(i).getTextValue().contains(field) ||
+//    				names.get(i).getTextValue().contains(field)	) {
+//    			row = true;
+    }
+    
+/*    @When("^i enter (.+) into (.+) filter$")
+    public void iEnterIntoFilter(String field, String filter) throws Throwable {
+    	switch(filter.toLowerCase()) {
+    	case "name":
+    		page.typeIntoNameFilter(field);
+    		break;
+    	case "phone":
+    		page.typeIntoPhoneFilter(field);
+    		break;
+    	case "email":
+    		page.typeIntoEmailFilter(field);
+    		break;
+    	case "address":
+    		page.typeIntoAddressFilter(field);
+    		break;
+    	}
+    }
+
+    @Then("^(.+) for the (.+) filter should be at the top of the list$")
+    public void shouldBeAtTheTopOfTheList(String field, String filter) throws Throwable {
+    	//API call to get field 
+		RestAssured.baseURI = baseUri;
+		Response response = SerenityRest.rest().given().when().get("/employees");
+		
+		JSONObject obj = new JSONObject(response.toString());
+		List<String> list = new ArrayList<String>();
+		JSONArray array = obj.getJSONArray("Bob");
+		for(int i = 0 ; i < array.length() ; i++){
+		    list.add(array.getJSONObject(i).getString("interestKey"));
+		}
+		
+		
+		
+		System.out.println(response.asString());
+		System.out.println(response.getBody().asString());
+//		response.getBody()
+*/    	
+        //page.getNames();
+   // }
+

@@ -9,7 +9,8 @@ Feature: ACME UI Tests
     Examples: 
       | username                 | password  |
       | jeff.diederiks@gmail.com | peachjeff |
-
+  #| paul.murphy@gmail.com    | pms       |
+  
   @list
   Scenario: Employee is able to view the list of employees in the database
     Given i open the ACME home page
@@ -32,8 +33,21 @@ Feature: ACME UI Tests
   #| fname | lname | email               | phone        | address                                 |
   #| John  | Smith | john.smith@acme.com | 555-555-5555 | 123 Main St., Washington, D.C. 22202    |
   #| Joe   | Shmo  | joe.shmo@acme.com   | 666-666-6666 | 321 Test Rd., New York City, N.Y. 24242 |
-  @UNLIMITED_SKILL
+  
+  @skill
   Scenario: An unbounded number of skills can be provided and stored with the profile
     Given i open the ACME home page
     When i click the name of the first employee
     Then i verify that i can view employee skills
+
+  @search
+  Scenario Outline: Test Search functionality
+    Given i open the ACME home page
+    When i login with username jeff.diederiks@gmail.com and password peachjeff
+    And i type <field> into search input
+    And i click the first name
+    Then <field> should display at the top of the list
+
+    Examples: 
+      | field |
+      | bob   |

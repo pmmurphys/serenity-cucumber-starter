@@ -27,7 +27,7 @@ targetCompatibility = 1.8
 
 dependencies {
     compile libs.logback
-
+    compile group: 'org.json', name: 'json', version: '20180813'
     testCompile libs.test.serenity.core,
             libs.test.serenity.screenplay,
             libs.test.serenity.junit,

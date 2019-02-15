@@ -19,6 +19,12 @@ public class BasePageObject extends PageObject{
 	@FindBy(css="tr[class=\"no-class\"] td:nth-child(3)") List<WebElementFacade> phoneFields;
 	@FindBy(css="tr[class=\"no-class\"] td:nth-child(4)") List<WebElementFacade> addressFields;
 	@FindBy(css="td div[style]") List<WebElementFacade> skillsFields;
+	@FindBy(id="search") WebElementFacade searchInput;
+	
+	@FindBy(css="input[title~='Name']") WebElementFacade nameFilter;
+	@FindBy(css="input[title~='Phone']") WebElementFacade phoneFilter;
+	@FindBy(css="input[title~='Email']") WebElementFacade emailFilter;
+	@FindBy(css="input[title~='Address']") WebElementFacade addressFilter;
 	
 	@FindBy(xpath="//*[@id=\"container\"]/div/main/div/div/div[2]/div/div[2]/div[1]/div/div/input") WebElementFacade modalFirstNameInput;
 	@FindBy(xpath="//*[@id=\"container\"]/div/main/div/div/div[2]/div/div[2]/div[2]/div/div/input") WebElementFacade modalLastNameInput;
@@ -110,6 +116,26 @@ public class BasePageObject extends PageObject{
 		employeeModel.setName(modalFirstNameInput.getTextValue()+" "+modalLastNameInput.getTextValue());
 		employeeModel.setPhone(modalPhoneInput.getTextValue());
 		return employeeModel;
+	}
+
+	public void typeIntoNameFilter(String field) {
+		nameFilter.type(field);
+	}
+
+	public void typeIntoPhoneFilter(String field) {
+		phoneFilter.type(field);
+	}
+
+	public void typeIntoEmailFilter(String field) {
+		emailFilter.type(field);
+	}
+
+	public void typeIntoAddressFilter(String field) {
+		addressFilter.type(field);
+	}
+
+	public void typeIntoSearchInput(String field) {
+		searchInput.type(field);
 	}
 
 }
