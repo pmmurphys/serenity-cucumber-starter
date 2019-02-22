@@ -6,7 +6,7 @@ Feature: ACME API Features
 
     Examples:
     | endpoint |
-    | null    |
+    | /test    |
     
   @API
   Scenario Outline: POST
@@ -14,14 +14,7 @@ Feature: ACME API Features
 
     Examples:
       | endpoint |
-      | null    |
+      | /test    |
 
-    @API
-    Scenario Outline: GET, deserialize, and store object
-      Given I deserialize and store object from GET <endpoint>
-
-      Examples:
-      | endpoint |
-      | null     |
 
     

@@ -5,6 +5,7 @@ ext{
     junitVersion='4.12'
     assertJVersion='3.8.0'
     logbackVersion='1.2.3'
+    jacksonVersion='2.9.8'
 
     libs = [
             slf4jApi: "org.slf4j:slf4j-api:$slf4jVersion",
@@ -20,7 +21,7 @@ ext{
                             cucumber: "net.serenity-bdd:serenity-cucumber:${serenityCucumberVersion}",
                     ],
                     junit: "junit:junit:${junitVersion}",
-                    assertj: "org.assertj:assertj-core:${assertJVersion}"
+                    assertj: "org.assertj:assertj-core:${assertJVersion}",
             ]
     ]
 }
