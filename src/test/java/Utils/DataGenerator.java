@@ -13,35 +13,14 @@ import java.util.regex.Pattern;
 
 public class DataGenerator {
 
-    /** Return a list that contains the capture groups of the regex expression
-     * when compiled against the string. Starts at index 1
-     *
-     * Remember! You need "\\\\" to match a single "\" in a string. Because java and regex escapes.
-     *
-     * Go to https://rubular.com for amazing real-time regex
-     *
-     * @param string
-     * @param regularExpression
-     * @return list of Strings parsed by regex*/
-    public List<String> getValuesFromRegEx(String string, String regularExpression) {
-        List<String> returnList = new ArrayList<String>();
-        Matcher m = Pattern.compile(regularExpression).matcher(string);
-        if (m.find()) {
-            for (int i = 0; i <= m.groupCount(); i++) {
-                returnList.add(m.group(i));
-            }
-        }
-        return returnList;
-    }
-
-    /** Returns a String of numbers of desired length
-     *
+    /** Returns a String of random numbers of desired length
      * @param length
      * @return random String of number of desired length */
     public String randomNumber(int length) {
         return RandomStringUtils.randomNumeric(length);
     }
-    /** Returns a random number between min and max
+
+    /** Returns a random int between min and max
      * @param min
      * @param max
      * @return random int between min and max */
@@ -51,17 +30,15 @@ public class DataGenerator {
     }
 
     /** Returns a String of random numbers and letters of desired length
-     *
      * @param length
-     * @return random alphanumeric string of desired length*/
+     * @return random String of alphanumeric of desired length*/
     public String randomAlphaNumeric(int length) {
         return RandomStringUtils.randomAlphanumeric(length);
     }
 
-    /** Returns a String of random letter of desired length
-     *
+    /** Returns a String of random letters of desired length
      * @param length
-     * @return random alphabetic string of desired length*/
+     * @return random String of letters of desired length*/
     public String randomAlphabetic(int length) {
         return RandomStringUtils.randomAlphabetic(length);
     }
@@ -84,5 +61,26 @@ public class DataGenerator {
             System.out.println("Parse Exception");
         }
         return outputDate;
+    }
+
+    /** Return a list that contains the capture groups of the regex expression
+     * when compiled against the string. Index 0 is the original string. Subesequent indexes are regex-parsed groupings.
+     *
+     * Remember! You need "\\\\" to match a single "\" in a string. Because java and regex escapes.
+     *
+     * Go to https://rubular.com for amazing real-time regex
+     *
+     * @param string
+     * @param regularExpression
+     * @return list of Strings parsed by regex*/
+    public List<String> getValuesFromRegEx(String string, String regularExpression) {
+        List<String> returnList = new ArrayList<String>();
+        Matcher m = Pattern.compile(regularExpression).matcher(string);
+        if (m.find()) {
+            for (int i = 0; i <= m.groupCount(); i++) {
+                returnList.add(m.group(i));
+            }
+        }
+        return returnList;
     }
 }
